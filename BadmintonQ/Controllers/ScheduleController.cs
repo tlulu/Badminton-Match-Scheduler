@@ -12,8 +12,9 @@ namespace BadmintonQ.Controllers
     public class ScheduleController : Controller
     {
         private BadmintonContext db = new BadmintonContext();
-        private List<Player> players= new List<Player>();
+        private List<Player> players = new List<Player>();
         private List<Player> new_players = new List<Player>();
+        TimeSlot ts = new TimeSlot();
 
 
         public List<PlayerModels> getActivePlayers(List<ActivePlayer> activePlayers)
@@ -27,7 +28,7 @@ namespace BadmintonQ.Controllers
             return temp;
         }
 
-        public ActionResult New()
+        public ActionResult Clear()
         {
             foreach (var p in db.ActivePlayers)
             {
@@ -36,60 +37,32 @@ namespace BadmintonQ.Controllers
                 p.GamesPlayed = 0;
                 db.SaveChanges();
             }
+
             return RedirectToAction("Index");
         }
 
+        public ActionResult Rotation()
+        {
+            ScheduleHelper.Rotate(db, players, ts);
+            return RedirectToAction("Index");
+        }
+
+
         public ActionResult Index()
         {
-            foreach (var p in db.ActivePlayers)
+
+            if (Session["PL"] != null)
             {
-                p.OnCourt = false;
-                db.SaveChanges();
+                ts = (TimeSlot)Session["PL"];
             }
-            List<ActivePlayer> temp = db.ActivePlayers.ToList();
-            foreach (var i in temp)
+            else
             {
-                players.Add(PlayerHelper.ActivePlayertoPlayer(i,db));
+                ScheduleHelper.Rotate(db, players, ts);
+                Session["PL"] = ts;
             }
-            
-            //if (Session["PL"] != null)
-            //{
-            //    players = (List<Player>)Session["PL"];
-            //    foreach (var i in players)
-            //    {
-            //        if (! temp.Any(x => x.ID == i.ID))
-            //        {
-            //            players.Remove(i);
-            //        }
-            //    }
-
-            //    foreach (var i in temp)
-            //    {
-            //        if (!players.Any(x => x.ID == i.ID))
-            //        {
-            //            new_players.Add(PlayerHelper.PlayerModeltoPlayer(i));
-            //        }
-            //    }
-
-            //}
-            //else
-            //{
-            //    foreach (var i in temp)
-            //    {
-            //        players.Add(PlayerHelper.PlayerModeltoPlayer(i));
-            //    }
-            //}
-
-            //ScheduleHelper.shufflePlayers(ref players);
-            TimeSlot ts = new TimeSlot();
-            ScheduleHelper.makeTimeSlot(ts, players, db);
-            //ScheduleHelper.makeTimeSlot(ts,ref players,ref new_players);
-            ViewBag.playerList = players.OrderBy(x=>x.FirstName);
-            //Session["PL"] = players;
-            //new_players.Clear();
 
             return View(ts);
         }
 
-	}
+    }
 }

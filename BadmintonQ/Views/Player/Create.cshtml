@@ -5,44 +5,71 @@
 {
     <fieldset>
         <table>
-            @Html.HiddenFor(x => x.ID);
+            @Html.HiddenFor(x => x.ID)
             <tr>
                 <td>
                     @Html.LabelFor(x => x.FirstName)
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.FirstName)
-                </td>              
+                </td>
             </tr>
             <tr>
-                @Html.LabelFor(model => model.LastName)
-                @Html.TextBoxFor(model => model.LastName)
+                <td>
+                    @Html.LabelFor(model => model.LastName)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.LastName)
+                </td>
             </tr>
             <tr>
-                @Html.LabelFor(model => model.Level)
-                @Html.TextBoxFor(model => model.Level)
+                <td>
+                    @Html.LabelFor(model => model.Level)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Level)
+                </td>
             </tr>
             <tr>
-                @Html.LabelFor(model => model.Paid)
-                @Html.CheckBoxFor(model => model.Paid)
+                <td>
+                    @Html.LabelFor(model => model.Paid)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(model => model.Paid)
+                </td>
             </tr>
             <tr>
-                @Html.LabelFor(model => model.Preference)
-                @Html.TextBoxFor(model => model.Preference)
+                <td>
+                    @Html.LabelFor(model => model.Preference)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Preference)
+                </td>
             </tr>
             <tr>
-                @Html.LabelFor(model => model.Gender)
-                @Html.TextBoxFor(model => model.Gender)
+                <td>
+                    @Html.LabelFor(model => model.Gender)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Gender)
+                </td>
             </tr>
             <tr>
-                @Html.LabelFor(model => model.Active)
-                @Html.CheckBoxFor(model => model.Active)
+                <td>
+                    @Html.LabelFor(model => model.Active)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(model => model.Active)
+                </td>
             </tr>
             <tr>
-                @Html.LabelFor(model => model.EnrollmentDate)
-                @Html.TextBoxFor(model => model.EnrollmentDate)
+                <td>
+                    @Html.LabelFor(model => model.EnrollmentDate)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.EnrollmentDate)
+                </td>
             </tr>
-
         </table>
 
         <p>

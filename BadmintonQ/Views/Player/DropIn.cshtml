@@ -1,9 +1,9 @@
-﻿@model IEnumerable<BadmintonQ.Models.ActivePlayer>
+﻿@model BadmintonQ.Models.Player
 @{
     ViewBag.Title = "DropIn";
 }
 
-<h2>DropIn</h2>
+<h1>Drop In</h1>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -23,13 +23,13 @@
                 type: "POST",
                 data: { comment: input },
                 dataType: "json",
-                success: function (data) { 
+                success: function (data) {
                     var jsonData = JSON.parse(data);
                     console.log(jsonData.toString());
                     console.log(jsonData.length);
                     for (var i = 0; i < jsonData.length; i++) {
                         var node = document.createElement("LI");
-                        var textnode = document.createTextNode(jsonData[i].FirstName + " " + jsonData[i].LastName);
+                        var textnode = document.createTextNode(jsonData[i].FirstName + " " + jsonData[i].LastName + "   ID: " + jsonData[i].ID);
                         console.log(jsonData[i].FirstName);
                         node.appendChild(textnode);
                         node.setAttribute("class", "list-group-item");
@@ -50,49 +50,57 @@
 
 </script>
 
-    <div>
-        <input type="text" id="SearchName" onkeyup="getPlayers()" style="width:100%" />
-        <ul id="ResultList" class="list-group">
-            <li class="list-group-item"></li>
-        </ul>
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="contentWrapperGen">
 
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        @Html.LabelFor(x => x.ID)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.ID)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(x => x.FirstName)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.FirstName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.LastName)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.LastName)
+                    </td>
+                    <td>
+                        <input type="submit" value="Submit" class="btn btn-primary" style="width:100%" />
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <br />
+        <div>
+            <div class="row">
+                <input type="text" id="SearchName" onkeyup="getPlayers()" style="width:100%" />
+                <input type="search" value="Search" class="btn btn-primary" />
+            </div>
+            <div>
+                <ul id="ResultList" class="list-group">
+                    <li class="list-group-item"></li>
+                </ul>
+            </div>
+        </div>
     </div>
 
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlayerID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GamesPlayed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Waits)
-        </td>
-      
-    </tr>
+
+
 }
-    
-    @*<fieldset>
-        <table>
-            <tr>
-                <td>
-                    @Html.LabelFor(x => x.ID)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.ID)
-                </td>
-            </tr>
-        </table>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>*@
-
-
-
-
-

@@ -1404,6 +1404,32 @@ pre code {
   }
 }
 
+.contentWrapper {
+        margin-top: 100px;
+        margin-bottom: auto;
+        background-color: white;
+        width: 100% auto;
+        height: 100% auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 50px #888888;
+    }
+
+
+.contentWrapperGen {
+        margin-top: 20px;
+        margin-bottom: auto;
+        background-color: white;
+        width: 100% auto;
+        height: 100% auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 50px #888888;
+        margin-left:0px auto;
+        margin-right:0px auto;
+        /*text-align:center;*/
+    }
+
 table {
   max-width: 100%;
   background-color: transparent;
@@ -4934,7 +4960,7 @@ a.list-group-item.active > .badge,
   font-weight: 200;
   line-height: 2.1428571435;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: white;
 }
 
 .jumbotron h1 {

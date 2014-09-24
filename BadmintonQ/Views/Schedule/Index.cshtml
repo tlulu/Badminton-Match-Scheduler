@@ -2,17 +2,13 @@
 @{
     ViewBag.Title = "Index";
     int count = 0;
-    string[] colors={"darkblue","darkred","darkgreen","black","purple"};
+    string[] colors = { "darkblue", "darkred", "darkgreen", "black", "purple" };
 }
 
 <h2 style="text-align:center">CURRENT GAMES</h2>
-<br/>
+<br />
 
 <style type="text/css">
-    body {
-        background-color: #FFFF99;
-    }
-
     #header {
         background: #ccc;
         padding: 20px;
@@ -109,20 +105,10 @@
         float: right;
     }
 
-    .contentWrapper {
-        margin-top: 100px;
-        margin-bottom: auto;
-        background-color: white;
-        width: 100% auto;
-        height: 100% auto;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 50px #888888;
-    }
 
     table {
         margin-left: 5%;
-        margin-top:20px;
+        margin-top: 20px;
     }
 
     .court {
@@ -162,9 +148,9 @@
 <script type="text/javascript">
 
     function Refresh() {
-        var URL = "/Schedule/New";
+        var URL = "/Schedule/Rotation";
         $.get(URL, function (data) {
-            
+
         });
 
     }
@@ -179,7 +165,8 @@
         <div class="content">
             <table id="courtTable">
                 <tr>
-                    @for (int i = 0; i < 4; i++) { 
+                    @for (int i = 0; i < 4; i++)
+                    {
                         if (Model.courts[i] != null)
                         {
                             <td>
@@ -191,8 +178,8 @@
                                         if (Model.courts[i].players[0] != null)
                                         {
                                             <div class="player1">
-                                                
-                                                <div  style="color:@colors[Model.courts[i].players[0].Level-1]"> Name: @Model.courts[i].players[0].FirstName </div> 
+
+                                                <div style="color:@colors[Model.courts[i].players[0].Level-1]"> Name: @Model.courts[i].players[0].FirstName </div>
                                                 <img src="@Url.Content("~/Content/Images/PlayerLvl" + Model.courts[i].players[0].Level + ".png")" />
                                             </div>
                                         }
@@ -258,8 +245,8 @@
                                         if (Model.courts[i].players[0] != null)
                                         {
                                             <div class="player1">
-                                                
-                                                <div  style="color:@colors[Model.courts[i].players[0].Level-1]"> Name: @Model.courts[i].players[0].FirstName </div> 
+
+                                                <div style="color:@colors[Model.courts[i].players[0].Level-1]"> Name: @Model.courts[i].players[0].FirstName </div>
                                                 <img src="@Url.Content("~/Content/Images/PlayerLvl" + Model.courts[i].players[0].Level + ".png")" />
                                             </div>
                                         }
@@ -314,20 +301,20 @@
             </table>
         </div>
 
+        <br />
+        @*<div id="aside">
+                <ul class="list-group">
+                    @foreach (var p in ViewBag.playerList)
+                    {
+                        <li class="list-group-item">@p.FirstName  @p.GamesPlayed @p.Waits</li>
+                    }
+                </ul>
+            </div>
 
-        <div id="aside">
-            <ul class="list-group">
-                @foreach (var p in ViewBag.playerList)
-                {
-                    <li class="list-group-item">@p.FirstName  @p.GamesPlayed @p.Waits</li>
-                }
-            </ul>
-        </div>
+            <div>
+                <input type="button" id="Refresh" value="refresh!" onclick="Refresh()" />
 
-        <div>
-            <input type="button" id="Refresh" value="refresh!" onclick="Refresh()" />
-
-        </div>
+            </div>*@
 
     </div>
 </body>

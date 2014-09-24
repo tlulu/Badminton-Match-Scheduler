@@ -33,15 +33,29 @@ namespace BadmintonQ.Helper
 
         }
 
-        public static void makeTimeSlot(TimeSlot ts, List<Player> players,BadmintonContext context)
+        public static void Rotate(BadmintonContext db, List<Player> players, TimeSlot ts)
+        {
+            foreach (var p in db.ActivePlayers)
+            {
+                p.OnCourt = false;
+                db.SaveChanges();
+            }
+            List<ActivePlayer> temp = db.ActivePlayers.ToList();
+            foreach (var i in temp)
+            {
+                players.Add(PlayerHelper.ActivePlayertoPlayer(i, db));
+            }
+            ScheduleHelper.makeTimeSlot(ts, players, db);
+        }
+
+        public static void makeTimeSlot(TimeSlot ts, List<Player> players, BadmintonContext context)
         {
             Random random = new Random();
             int numOfCourts = TimeSlot.getNumOfCourts();
             List<List<Player>> playergrid = new List<List<Player>>();
             List<int> onCourtIDs = new List<int>();
-            int numOfLevels=5;
-            int numOfPlayersOnCourt=4;
-            int ran;
+            int numOfLevels = 5;
+            int numOfPlayersOnCourt = 4;
             int count;
             int lvl;
 
@@ -61,7 +75,7 @@ namespace BadmintonQ.Helper
                 Court court = new Court();
                 count = 0;
 
-                players=players.OrderByDescending(x => x.Waits).ToList();
+                players = players.OrderByDescending(x => x.Waits).ToList();
 
                 for (int j = 0; j < players.Count; j++)
                 {
@@ -69,7 +83,7 @@ namespace BadmintonQ.Helper
                     {
                         break;
                     }
-                    lvl = players.ElementAt(j).Level-1;
+                    lvl = players.ElementAt(j).Level - 1;
                     playergrid[lvl] = playergrid[lvl].OrderByDescending(x => x.Waits).ToList();
                     for (int k = 0; k < playergrid[lvl].Count; k++)
                     {
@@ -88,7 +102,7 @@ namespace BadmintonQ.Helper
                     if (count < numOfPlayersOnCourt)
                     {
                         lvl++;
-                        if (lvl <5)
+                        if (lvl < 5)
                         {
                             playergrid[lvl] = playergrid[lvl].OrderByDescending(x => x.Waits).ToList();
                             for (int k = 0; k < playergrid[lvl].Count; k++)
@@ -108,8 +122,8 @@ namespace BadmintonQ.Helper
 
                         if (count < numOfPlayersOnCourt)
                         {
-                            lvl=lvl-2;
-                            if (lvl >=0)
+                            lvl = lvl - 2;
+                            if (lvl >= 0)
                             {
                                 playergrid[lvl] = playergrid[lvl].OrderByDescending(x => x.Waits).ToList();
                                 for (int k = 0; k < playergrid[lvl].Count; k++)
@@ -128,19 +142,8 @@ namespace BadmintonQ.Helper
                             }
                         }
                     }
-
-                    for (int q = 0; q < playergrid.Count; q++)
-                    {
-                        for (int p = 0; p < playergrid[q].Count; p++)
-                        {
-                            Debug.Write(playergrid[q][p].Waits);
-                        }
-                        Debug.WriteLine("");
-                    }
                 }
-                Debug.WriteLine("");
                 ts.addCourt(court);
-                //context.SaveChanges();
             }
             for (int q = 0; q < playergrid.Count; q++)
             {
@@ -162,7 +165,7 @@ namespace BadmintonQ.Helper
                     context.SaveChanges();
                 }
             }
-            
+
         }
 
     }

@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace BadmintonQ.Controllers
 {
-    public class PlayerController: Controller
+    public class PlayerController : Controller
     {
         private BadmintonContext db = new BadmintonContext();
 
@@ -41,13 +41,12 @@ namespace BadmintonQ.Controllers
         public ActionResult List()
         {
             List<PlayerModels> playerList = db.Players.ToList();
-            List<Player> players=new List<Player>();
-            foreach (var p in playerList){
+            List<Player> players = new List<Player>();
+            foreach (var p in playerList)
+            {
                 players.Add(PlayerHelper.PlayerModeltoPlayer(p));
             }
             return View(players);
-            //var json = new JavaScriptSerializer().Serialize(db.Players);
-            //return Json(json);
         }
 
         public ActionResult Details(int id)
@@ -63,15 +62,22 @@ namespace BadmintonQ.Controllers
 
         public ActionResult DropIn()
         {
-
-            return View(db.ActivePlayers.ToList());
+            return View();
         }
 
         [HttpPost]
-        public ActionResult DropIn(int id)
+        public ActionResult DropIn(Player model)
         {
-            db.Players.FirstOrDefault(x => x.ID == id).Active = true;
-            db.SaveChanges();
+            if (db.ActivePlayers.SingleOrDefault(x => x.PlayerID == model.ID) == null)
+            {
+                ActivePlayer newPlayer = new ActivePlayer();
+                newPlayer.OnCourt = false;
+                newPlayer.PlayerID = model.ID;
+                newPlayer.Waits = 0;
+                newPlayer.GamesPlayed = 0;
+                db.ActivePlayers.Add(newPlayer);
+                db.SaveChanges();
+            }
             return RedirectToAction("List");
         }
 
