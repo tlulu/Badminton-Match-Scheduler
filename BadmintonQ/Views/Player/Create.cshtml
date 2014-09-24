@@ -1,0 +1,56 @@
+﻿@model BadmintonQ.Models.PlayerModels
+<h2>Create</h2>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <fieldset>
+        <table>
+            @Html.HiddenFor(x => x.ID);
+            <tr>
+                <td>
+                    @Html.LabelFor(x => x.FirstName)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.FirstName)
+                </td>              
+            </tr>
+            <tr>
+                @Html.LabelFor(model => model.LastName)
+                @Html.TextBoxFor(model => model.LastName)
+            </tr>
+            <tr>
+                @Html.LabelFor(model => model.Level)
+                @Html.TextBoxFor(model => model.Level)
+            </tr>
+            <tr>
+                @Html.LabelFor(model => model.Paid)
+                @Html.CheckBoxFor(model => model.Paid)
+            </tr>
+            <tr>
+                @Html.LabelFor(model => model.Preference)
+                @Html.TextBoxFor(model => model.Preference)
+            </tr>
+            <tr>
+                @Html.LabelFor(model => model.Gender)
+                @Html.TextBoxFor(model => model.Gender)
+            </tr>
+            <tr>
+                @Html.LabelFor(model => model.Active)
+                @Html.CheckBoxFor(model => model.Active)
+            </tr>
+            <tr>
+                @Html.LabelFor(model => model.EnrollmentDate)
+                @Html.TextBoxFor(model => model.EnrollmentDate)
+            </tr>
+
+        </table>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+
+}
+
+
+

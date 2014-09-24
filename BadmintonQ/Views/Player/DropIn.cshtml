@@ -1,0 +1,98 @@
+﻿@model IEnumerable<BadmintonQ.Models.ActivePlayer>
+@{
+    ViewBag.Title = "DropIn";
+}
+
+<h2>DropIn</h2>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+
+    function getPlayers() {
+        var myNode = document.getElementById("ResultList");
+        while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+        }
+        var input = $("#SearchName").val();
+        console.log(input);
+        if (input != "") {
+            $.ajax({
+                url: "/Player/DropInList",
+                type: "POST",
+                data: { comment: input },
+                dataType: "json",
+                success: function (data) { 
+                    var jsonData = JSON.parse(data);
+                    console.log(jsonData.toString());
+                    console.log(jsonData.length);
+                    for (var i = 0; i < jsonData.length; i++) {
+                        var node = document.createElement("LI");
+                        var textnode = document.createTextNode(jsonData[i].FirstName + " " + jsonData[i].LastName);
+                        console.log(jsonData[i].FirstName);
+                        node.appendChild(textnode);
+                        node.setAttribute("class", "list-group-item");
+                        document.getElementById("ResultList").appendChild(node);
+                    }
+                    // }
+                },
+                error: function (xhr, textStatus, error) {
+                    console.log(xhr.statusText);
+                    console.log(textStatus);
+                    console.log(error);
+                }
+
+            });
+
+        }
+    }
+
+</script>
+
+    <div>
+        <input type="text" id="SearchName" onkeyup="getPlayers()" style="width:100%" />
+        <ul id="ResultList" class="list-group">
+            <li class="list-group-item"></li>
+        </ul>
+
+    </div>
+
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlayerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GamesPlayed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Waits)
+        </td>
+      
+    </tr>
+}
+    
+    @*<fieldset>
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(x => x.ID)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.ID)
+                </td>
+            </tr>
+        </table>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>*@
+
+
+
+
+

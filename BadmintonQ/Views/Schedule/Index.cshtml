@@ -1,0 +1,333 @@
+﻿@model BadmintonQ.Models.TimeSlot
+@{
+    ViewBag.Title = "Index";
+    int count = 0;
+    string[] colors={"darkblue","darkred","darkgreen","black","purple"};
+}
+
+<h2 style="text-align:center">CURRENT GAMES</h2>
+<br/>
+
+<style type="text/css">
+    body {
+        background-color: #FFFF99;
+    }
+
+    #header {
+        background: #ccc;
+        padding: 20px;
+    }
+
+        #header h1 {
+            margin: 0;
+        }
+
+    #navigation {
+        float: left;
+        width: 100%;
+        background: #333;
+    }
+
+        #navigation ul {
+            margin: 0;
+            padding: 0;
+        }
+
+            #navigation ul li {
+                list-style-type: none;
+                display: inline;
+            }
+
+        #navigation li a {
+            display: block;
+            float: left;
+            padding: 5px 10px;
+            color: #fff;
+            text-decoration: none;
+            border-right: 1px solid #fff;
+        }
+
+            #navigation li a:hover {
+                background: #383;
+            }
+
+    #content-container {
+        float: left;
+        width: 100%;
+        background: #FFF url(layout-two-liquid-background.gif) repeat-y 68% 0;
+        border-radius: 10px;
+        box-shadow: 0px 0px 50px #888888;
+    }
+
+    #content {
+        clear: left;
+        float: left;
+        width: 60%;
+        padding: 20px 0;
+        margin: 0 0 0 4%;
+        display: inline;
+    }
+
+        #content h2 {
+            margin: 0;
+        }
+
+    #aside {
+        float: right;
+        width: 26%;
+        padding: 20px 0;
+        margin: 0 3% 0 0;
+    }
+
+        #aside h3 {
+            margin: 0;
+        }
+
+    #footer {
+        clear: left;
+        background: #ccc;
+        text-align: right;
+        padding: 20px;
+        height: 1%;
+    }
+
+    .list-group {
+        width: 200px;
+    }
+
+    .bs-example {
+        margin: 20px;
+    }
+
+    .playerlist {
+        float: left;
+        overflow: scroll;
+        height: auto;
+    }
+
+    .main {
+        float: right;
+    }
+
+    .contentWrapper {
+        margin-top: 100px;
+        margin-bottom: auto;
+        background-color: white;
+        width: 100% auto;
+        height: 100% auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 50px #888888;
+    }
+
+    table {
+        margin-left: 5%;
+        margin-top:20px;
+    }
+
+    .court {
+        position: relative;
+        width: 100%;
+    }
+
+    .player1 {
+        top: 30px;
+        margin-left: 60px;
+        position: absolute;
+    }
+
+    .player2 {
+        top: 60px;
+        margin-left: 140px;
+        position: absolute;
+    }
+
+    .player3 {
+        top: 215px;
+        margin-left: 60px;
+        position: absolute;
+    }
+
+    .player4 {
+        top: 250px;
+        margin-left: 140px;
+        position: absolute;
+    }
+</style>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+
+    function Refresh() {
+        var URL = "/Schedule/New";
+        $.get(URL, function (data) {
+            
+        });
+
+    }
+
+</script>
+
+
+
+<body>
+    <div id="content-container">
+
+        <div class="content">
+            <table id="courtTable">
+                <tr>
+                    @for (int i = 0; i < 4; i++) { 
+                        if (Model.courts[i] != null)
+                        {
+                            <td>
+                                <div class="court">
+                                    <img src="@Url.Content("~/Content/Images/BadmintonCourt.png")" />
+
+                                    @if (Model.courts[i].players != null)
+                                    {
+                                        if (Model.courts[i].players[0] != null)
+                                        {
+                                            <div class="player1">
+                                                
+                                                <div  style="color:@colors[Model.courts[i].players[0].Level-1]"> Name: @Model.courts[i].players[0].FirstName </div> 
+                                                <img src="@Url.Content("~/Content/Images/PlayerLvl" + Model.courts[i].players[0].Level + ".png")" />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="player1">Empty</div>
+                                        }
+
+                                        if (Model.courts[i].players[1] != null)
+                                        {
+                                            <div class="player2">
+                                                <p style="color:@colors[Model.courts[i].players[1].Level-1]"> Name: @Model.courts[i].players[1].FirstName </p>
+                                                <img src="@Url.Content("~/Content/Images/PlayerLvl" + Model.courts[i].players[1].Level + ".png")" />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="player2">Empty</div>
+                                        }
+
+                                        if (Model.courts[i].players[2] != null)
+                                        {
+                                            <div class="player3">
+                                                <p style="color:@colors[Model.courts[i].players[2].Level-1]"> Name: @Model.courts[i].players[2].FirstName </p>
+                                                <img src="@Url.Content("~/Content/Images/PlayerLvl" + Model.courts[i].players[2].Level + ".png")" />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="player3">Empty</div>
+                                        }
+
+                                        if (Model.courts[i].players[3] != null)
+                                        {
+                                            <div class="player4">
+                                                <p style="color:@colors[Model.courts[i].players[3].Level-1]"> Name: @Model.courts[i].players[3].FirstName </p>
+                                                <img src="@Url.Content("~/Content/Images/PlayerLvl" + Model.courts[i].players[3].Level + ".png")" />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="player4">Empty</div>
+                                        }
+                                    }
+
+                                </div>
+
+                            </td>
+                        }
+                    }
+                </tr>
+                <tr>
+                    @for (int i = 4; i < Model.courts.Count; i++)
+                    {
+                        if (Model.courts[i] != null)
+                        {
+                            <td>
+                                <div class="court">
+                                    <img src="@Url.Content("~/Content/Images/BadmintonCourt.png")" />
+
+                                    @if (Model.courts[i].players != null)
+                                    {
+                                        if (Model.courts[i].players[0] != null)
+                                        {
+                                            <div class="player1">
+                                                
+                                                <div  style="color:@colors[Model.courts[i].players[0].Level-1]"> Name: @Model.courts[i].players[0].FirstName </div> 
+                                                <img src="@Url.Content("~/Content/Images/PlayerLvl" + Model.courts[i].players[0].Level + ".png")" />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="player1">Empty</div>
+                                        }
+
+                                        if (Model.courts[i].players[1] != null)
+                                        {
+                                            <div class="player2">
+                                                <p style="color:@colors[Model.courts[i].players[1].Level-1]"> Name: @Model.courts[i].players[1].FirstName </p>
+                                                <img src="@Url.Content("~/Content/Images/PlayerLvl" + Model.courts[i].players[1].Level + ".png")" />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="player2">Empty</div>
+                                        }
+
+                                        if (Model.courts[i].players[2] != null)
+                                        {
+                                            <div class="player3">
+                                                <p style="color:@colors[Model.courts[i].players[2].Level-1]"> Name: @Model.courts[i].players[2].FirstName </p>
+                                                <img src="@Url.Content("~/Content/Images/PlayerLvl" + Model.courts[i].players[2].Level + ".png")" />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="player3">Empty</div>
+                                        }
+
+                                        if (Model.courts[i].players[3] != null)
+                                        {
+                                            <div class="player4">
+                                                <p style="color:@colors[Model.courts[i].players[3].Level-1]"> Name: @Model.courts[i].players[3].FirstName </p>
+                                                <img src="@Url.Content("~/Content/Images/PlayerLvl" + Model.courts[i].players[3].Level + ".png")" />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="player4">Empty</div>
+                                        }
+                                    }
+
+                                </div>
+
+                            </td>
+                        }
+                    }
+                </tr>
+            </table>
+        </div>
+
+
+        <div id="aside">
+            <ul class="list-group">
+                @foreach (var p in ViewBag.playerList)
+                {
+                    <li class="list-group-item">@p.FirstName  @p.GamesPlayed @p.Waits</li>
+                }
+            </ul>
+        </div>
+
+        <div>
+            <input type="button" id="Refresh" value="refresh!" onclick="Refresh()" />
+
+        </div>
+
+    </div>
+</body>
