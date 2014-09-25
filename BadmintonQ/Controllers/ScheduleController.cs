@@ -43,7 +43,7 @@ namespace BadmintonQ.Controllers
 
         public ActionResult Rotation()
         {
-            ScheduleHelper.Rotate(db, players, ts);
+            Session["PL"] = null;
             return RedirectToAction("Index");
         }
 

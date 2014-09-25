@@ -40,11 +40,11 @@ namespace BadmintonQ.Controllers
 
         public ActionResult List()
         {
-            List<PlayerModels> playerList = db.Players.ToList();
+            List<ActivePlayer> activePlayerList = db.ActivePlayers.ToList();
             List<Player> players = new List<Player>();
-            foreach (var p in playerList)
+            foreach (var p in activePlayerList)
             {
-                players.Add(PlayerHelper.PlayerModeltoPlayer(p));
+                players.Add(PlayerHelper.ActivePlayertoPlayer(p,db));
             }
             return View(players);
         }

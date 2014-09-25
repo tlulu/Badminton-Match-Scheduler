@@ -38,6 +38,7 @@ namespace BadmintonQ.Helper
             player.Level = model.Level;
             player.Preference = model.Preference;
             player.EnrollmentDate = model.EnrollmentDate;
+            player.OnCourt = activePlayer.OnCourt;
             player.Active = model.Active;
             player.Waits = activePlayer.Waits;
             player.GamesPlayed = activePlayer.GamesPlayed;
