@@ -15,6 +15,8 @@ namespace BadmintonQ.Controllers
     {
         private BadmintonContext db = new BadmintonContext();
 
+        #region CRUD
+
         public ActionResult Create()
         {
             return View();
@@ -60,32 +62,30 @@ namespace BadmintonQ.Controllers
             return View(player);
         }
 
+        #endregion
+
         public ActionResult DropIn()
         {
             return View();
         }
 
+        /* Adds a new ActivePlayer entity
+         * into the ActivePlayers table 
+         */
         [HttpPost]
         public ActionResult DropIn(Player model)
         {
-            if (db.ActivePlayers.SingleOrDefault(x => x.PlayerID == model.ID) == null)
-            {
-                ActivePlayer newPlayer = new ActivePlayer();
-                newPlayer.OnCourt = false;
-                newPlayer.PlayerID = model.ID;
-                newPlayer.Waits = 0;
-                newPlayer.GamesPlayed = 0;
-                db.ActivePlayers.Add(newPlayer);
-                db.SaveChanges();
-            }
+            PlayerHelper.AddActivePlayer(model, db);
             return RedirectToAction("List");
         }
 
-        [HttpPost]
-        public ActionResult DropInList(string comment)
+        /* Returns a list of players in the Players table
+         * Returns list in json format
+         */
+        public ActionResult DropInSearch(string input)
         {
-            var json = new JavaScriptSerializer().Serialize(db.Players.Where(x => x.FirstName.Contains(comment) || x.LastName.Contains(comment)));
-            return Json(json);
+            var json = PlayerHelper.GetSearchedPlayersJson(input, db);
+            return Json(json, JsonRequestBehavior.AllowGet);
         }
 
     }

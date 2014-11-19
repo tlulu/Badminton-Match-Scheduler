@@ -5,10 +5,12 @@ using System.Web;
 
 namespace BadmintonQ.Models
 {
+    /*A court contains player objects
+     */
     public class Court
     {
         public List<Player> players { get; set; }
-        private int maxNum = 4;
+        private static int maxNumPlayersOnCourt = 4;
 
         public Court()
         {
@@ -17,7 +19,7 @@ namespace BadmintonQ.Models
         public int getPlayerNum()
         {
             int c = 0;
-            for (int i = 0; i < maxNum; i++)
+            for (int i = 0; i < maxNumPlayersOnCourt; i++)
             {
                 if (players.ElementAt(i)!= null)
                 {
@@ -29,11 +31,15 @@ namespace BadmintonQ.Models
 
         public void addPlayer(Player p)
         {
-            if (players.Count< maxNum)
+            if (players.Count < maxNumPlayersOnCourt)
             {
                 players.Add(p);
             }
                 
+        }
+
+        public static int intGetNumOfPlayersOnCourt(){
+            return maxNumPlayersOnCourt;
         }
 
        

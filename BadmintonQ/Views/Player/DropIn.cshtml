@@ -19,9 +19,9 @@
         console.log(input);
         if (input != "") {
             $.ajax({
-                url: "/Player/DropInList",
-                type: "POST",
-                data: { comment: input },
+                url: "/Player/DropInSearch",
+                type: "GET",
+                data: { input: input },
                 dataType: "json",
                 success: function (data) {
                     var jsonData = JSON.parse(data);
@@ -35,16 +35,13 @@
                         node.setAttribute("class", "list-group-item");
                         document.getElementById("ResultList").appendChild(node);
                     }
-                    // }
                 },
                 error: function (xhr, textStatus, error) {
                     console.log(xhr.statusText);
                     console.log(textStatus);
                     console.log(error);
                 }
-
             });
-
         }
     }
 
@@ -53,7 +50,6 @@
 @using (Html.BeginForm(FormMethod.Post))
 {
     <div class="contentWrapperGen">
-
         <div>
             <table>
                 <tr>

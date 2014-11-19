@@ -6,7 +6,8 @@ using System.Web;
 
 namespace BadmintonQ.Models
 {
-    public class ActivePlayer
+    /*View Model for active players */
+    public class ActivePlayer   
     {
         [Key]
         public int ID { get; set; }

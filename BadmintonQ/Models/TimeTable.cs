@@ -5,10 +5,13 @@ using System.Web;
 
 namespace BadmintonQ.Models
 {
+    /* A TimeTable is the schedule of matches for the entire session
+     * Contains a list of TimeSlot objects
+     * OBSOLETE DUE TO DIFFERENT IMPLEMENTATION
+     */
     public class TimeTable
     {
         public List<TimeSlot> times { get; set; }
-        public int numOfDoubleCourts = 4;
 
         public TimeTable(){
             times=new List<TimeSlot>();

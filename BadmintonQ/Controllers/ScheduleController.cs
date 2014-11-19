@@ -13,10 +13,11 @@ namespace BadmintonQ.Controllers
     {
         private BadmintonContext db = new BadmintonContext();
         private List<Player> players = new List<Player>();
-        private List<Player> new_players = new List<Player>();
         TimeSlot ts = new TimeSlot();
 
-
+        /* Returns a list of players
+         * that have signed in 
+         */
         public List<PlayerModels> getActivePlayers(List<ActivePlayer> activePlayers)
         {
             List<PlayerModels> temp = new List<PlayerModels>();
@@ -28,26 +29,19 @@ namespace BadmintonQ.Controllers
             return temp;
         }
 
-        public ActionResult Clear()
-        {
-            foreach (var p in db.ActivePlayers)
-            {
-                p.Waits = 0;
-                p.OnCourt = false;
-                p.GamesPlayed = 0;
-                db.SaveChanges();
-            }
-
-            return RedirectToAction("Index");
-        }
-
+        /* Clears the session variable 
+         * Allows for new players to be on the court
+         */
         public ActionResult Rotation()
         {
             Session["PL"] = null;
             return RedirectToAction("Index");
         }
 
-
+        /* Displays the schedule page
+         * Stores current matches (TimeSlot) using a session variable
+         * After a rotation, a new list of players is generated and stored in the session variable
+         */
         public ActionResult Index()
         {
 

@@ -50,26 +50,26 @@ namespace BadmintonQ.DAL
 
             var activePlayers = new List<ActivePlayer>
             {
-            //new ActivePlayer{PlayerID=1,GamesPlayed=2,Waits=1,OnCourt=false},
-            //new ActivePlayer{PlayerID=2,GamesPlayed=2,Waits=0,OnCourt=false},
-            //new ActivePlayer{PlayerID=3,GamesPlayed=2,Waits=0,OnCourt=false},
-            //new ActivePlayer{PlayerID=4,GamesPlayed=2,Waits=1,OnCourt=false},
-            //new ActivePlayer{PlayerID=5,GamesPlayed=2,Waits=2,OnCourt=false},
-            //new ActivePlayer{PlayerID=6,GamesPlayed=2,Waits=3,OnCourt=false},
-            //new ActivePlayer{PlayerID=7,GamesPlayed=2,Waits=3,OnCourt=false},
-            //new ActivePlayer{PlayerID=8,GamesPlayed=2,Waits=2,OnCourt=false},
-            //new ActivePlayer{PlayerID=9,GamesPlayed=2,Waits=2,OnCourt=false},
-            //new ActivePlayer{PlayerID=10,GamesPlayed=2,Waits=2,OnCourt=false},
-            //new ActivePlayer{PlayerID=11,GamesPlayed=2,Waits=1,OnCourt=false},
-            //new ActivePlayer{PlayerID=12,GamesPlayed=2,Waits=1,OnCourt=false},
-            //new ActivePlayer{PlayerID=13,GamesPlayed=2,Waits=2,OnCourt=false},
-            //new ActivePlayer{PlayerID=14,GamesPlayed=2,Waits=3,OnCourt=false},
-            //new ActivePlayer{PlayerID=15,GamesPlayed=2,Waits=1,OnCourt=false},
-            //new ActivePlayer{PlayerID=16,GamesPlayed=2,Waits=3,OnCourt=false},
-            //new ActivePlayer{PlayerID=17,GamesPlayed=2,Waits=3,OnCourt=false},
-            //new ActivePlayer{PlayerID=18,GamesPlayed=2,Waits=3,OnCourt=false},
-            //new ActivePlayer{PlayerID=19,GamesPlayed=2,Waits=3,OnCourt=false},
-            //new ActivePlayer{PlayerID=20,GamesPlayed=2,Waits=1,OnCourt=false}
+            new ActivePlayer{PlayerID=1,GamesPlayed=2,Waits=1,OnCourt=false},
+            new ActivePlayer{PlayerID=2,GamesPlayed=2,Waits=0,OnCourt=false},
+            new ActivePlayer{PlayerID=3,GamesPlayed=2,Waits=0,OnCourt=false},
+            new ActivePlayer{PlayerID=4,GamesPlayed=2,Waits=1,OnCourt=false},
+            new ActivePlayer{PlayerID=5,GamesPlayed=2,Waits=2,OnCourt=false},
+            new ActivePlayer{PlayerID=6,GamesPlayed=2,Waits=3,OnCourt=false},
+            new ActivePlayer{PlayerID=7,GamesPlayed=2,Waits=3,OnCourt=false},
+            new ActivePlayer{PlayerID=8,GamesPlayed=2,Waits=2,OnCourt=false},
+            new ActivePlayer{PlayerID=9,GamesPlayed=2,Waits=2,OnCourt=false},
+            new ActivePlayer{PlayerID=10,GamesPlayed=2,Waits=2,OnCourt=false},
+            new ActivePlayer{PlayerID=11,GamesPlayed=2,Waits=1,OnCourt=false},
+            new ActivePlayer{PlayerID=12,GamesPlayed=2,Waits=1,OnCourt=false},
+            new ActivePlayer{PlayerID=13,GamesPlayed=2,Waits=2,OnCourt=false},
+            new ActivePlayer{PlayerID=14,GamesPlayed=2,Waits=3,OnCourt=false},
+            new ActivePlayer{PlayerID=15,GamesPlayed=2,Waits=1,OnCourt=false},
+            new ActivePlayer{PlayerID=16,GamesPlayed=2,Waits=3,OnCourt=false},
+            new ActivePlayer{PlayerID=17,GamesPlayed=2,Waits=3,OnCourt=false},
+            new ActivePlayer{PlayerID=18,GamesPlayed=2,Waits=3,OnCourt=false},
+            new ActivePlayer{PlayerID=19,GamesPlayed=2,Waits=3,OnCourt=false},
+            new ActivePlayer{PlayerID=20,GamesPlayed=2,Waits=1,OnCourt=false}
             };
 
             activePlayers.ForEach(s => context.ActivePlayers.Add(s));
